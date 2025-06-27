@@ -19,4 +19,6 @@ function BrandingBadge() {
   );
 }
 
-export default BrandingBadge;
+export default BrandingBadge() {
+  return null;   
+}

@@ -7,7 +7,7 @@ import classNames from "classnames";
 import PrimaryCTA from "./PrimaryCTA";
 import { getCurrentWorkspaceId } from "ee/selectors/selectedWorkspaceSelectors";
 import { getSelectedAppTheme } from "selectors/appThemingSelectors";
-import BrandingBadge from "./BrandingBadgeMobile";
+//import BrandingBadge from "./BrandingBadgeMobile";
 import { getAppViewHeaderHeight } from "selectors/appViewSelectors";
 import { useOnClickOutside } from "utils/hooks/useOnClickOutside";
 import { useHref } from "pages/Editor/utils";
@@ -146,16 +146,6 @@ export function PageMenu(props: NavigationProps) {
                 insideSidebar
               />
 
-              {!hideWatermark && (
-                <a
-                  className="flex mt-2 hover:no-underline"
-                  href="https://appsmith.com"
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  <BrandingBadge />
-                </a>
-              )}
             </StyledCtaContainer>
           )}
         </div>
