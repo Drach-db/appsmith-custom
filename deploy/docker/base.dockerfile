@@ -93,3 +93,6 @@ RUN NSS_WRAPPER_LIB=$(find /usr/lib -name libnss_wrapper.so -type f 2>/dev/null 
 # these env vars need to be set for NSS Wrapper to work but don't matter until LD_PRELOAD is set which is optionally done at runtime
 ENV NSS_WRAPPER_PASSWD="${TMP}/passwd"
 ENV NSS_WRAPPER_GROUP="${TMP}/group"
+# Копируем скрипт запуска внутрь контейнера
+COPY deploy/docker/fs/opt/appsmith/start_app.sh /opt/appsmith/start_app.sh
+RUN chmod +x /opt/appsmith/start_app.sh
