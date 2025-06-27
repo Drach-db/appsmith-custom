@@ -1,3 +1,3 @@
 #!/bin/bash
 echo "Starting Appsmith inside container..."
-exec /opt/appsmith/run-starting-page-init.sh
+exec /opt/appsmith/run-java.sh
