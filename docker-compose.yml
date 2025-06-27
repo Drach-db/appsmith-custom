@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  appsmith:
+    image: appsmith-custom:latest
+    container_name: appsmith
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /home/ubuntu/stacks:/appsmith-stacks   # ← используем основную директорию
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    environment:
+      APPSMITH_SUPABASE_URL: ${APPSMITH_SUPABASE_URL}
+      APPSMITH_SUPABASE_ANON: ${APPSMITH_SUPABASE_ANON}
+      APPSMITH_DASHBOARD_URL: ${APPSMITH_DASHBOARD_URL}
+      APPSMITH_CUSTOM_DOMAIN: ${APPSMITH_CUSTOM_DOMAIN}
+    command: ["/opt/appsmith/start_app.sh"]
