@@ -2,11 +2,13 @@ version: "3.8"
 
 services:
   appsmith:
-    # Собираем образ из корня, Dockerfile там же
     build:
       context: .
-      dockerfile: Dockerfile          # ← Этот (НЕ base.dockerfile)
-    image: appsmith-custom:latest     # Чтобы потом можно было push/pull
+      dockerfile: Dockerfile
+      # ↓↓↓ ДОБАВИЛИ аргумент BASE ↓↓↓
+      args:
+        BASE: public.ecr.aws/appsmith/appsmith-base:debian   # или docker.io/appsmith/appsmith-base:debian
+    image: appsmith-custom:latest
     container_name: appsmith
     restart: unless-stopped
 
@@ -14,11 +16,9 @@ services:
       - "80:80"
       - "443:443"
 
-    # Монтируем ХОСТОВУЮ папку (она НЕ в репозитории)
     volumes:
       - /home/ubuntu/stacks:/appsmith-stacks
 
-    # DNS по желанию
     dns:
       - 8.8.8.8
       - 1.1.1.1
@@ -28,3 +28,6 @@ services:
       APPSMITH_SUPABASE_ANON: ${APPSMITH_SUPABASE_ANON}
       APPSMITH_DASHBOARD_URL: ${APPSMITH_DASHBOARD_URL}
       APPSMITH_CUSTOM_DOMAIN: ${APPSMITH_CUSTOM_DOMAIN}
+      # желательны ещё две строки — иначе Appsmith не сможет шифровать секреты
+      APPSMITH_ENCRYPTION_PASSWORD: ${APPSMITH_ENCRYPTION_PASSWORD}
+      APPSMITH_ENCRYPTION_SALT: ${APPSMITH_ENCRYPTION_SALT}
