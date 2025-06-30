@@ -1,15 +1,26 @@
-# Use for running an Appsmith, during development.
-
-version: "3"
+version: "3.8"
 
 services:
   appsmith:
-    image: index.docker.io/appsmith/appsmith-ce:release
+    image: appsmith/appsmith-ce:latest
     container_name: appsmith
+    restart: unless-stopped
+
     ports:
-      - "8080:80"
-    environment:
-      APPSMITH_ENCRYPTION_PASSWORD: abcd
-      APPSMITH_ENCRYPTION_SALT: abcd
+      - "80:80"
+      - "443:443"
+
     volumes:
-      - ./stacks:/appsmith-stacks
+      - /home/ubuntu/stacks:/appsmith-stacks
+
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+
+    environment:
+      APPSMITH_ENCRYPTION_PASSWORD: ${APPSMITH_ENCRYPTION_PASSWORD}
+      APPSMITH_ENCRYPTION_SALT: ${APPSMITH_ENCRYPTION_SALT}
+      APPSMITH_SUPABASE_URL: ${APPSMITH_SUPABASE_URL}
+      APPSMITH_SUPABASE_ANON: ${APPSMITH_SUPABASE_ANON}
+      APPSMITH_DASHBOARD_URL: ${APPSMITH_DASHBOARD_URL}
+      APPSMITH_CUSTOM_DOMAIN: ${APPSMITH_CUSTOM_DOMAIN}
