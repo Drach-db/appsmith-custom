@@ -2,13 +2,7 @@ version: "3.8"
 
 services:
   appsmith:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      # ↓↓↓ ДОБАВИЛИ аргумент BASE ↓↓↓
-      args:
-        BASE: public.ecr.aws/appsmith/appsmith-base:debian   # или docker.io/appsmith/appsmith-base:debian
-    image: appsmith-custom:latest
+    image: appsmith/appsmith-ce:latest   # официальный CE-образ
     container_name: appsmith
     restart: unless-stopped
 
@@ -28,6 +22,5 @@ services:
       APPSMITH_SUPABASE_ANON: ${APPSMITH_SUPABASE_ANON}
       APPSMITH_DASHBOARD_URL: ${APPSMITH_DASHBOARD_URL}
       APPSMITH_CUSTOM_DOMAIN: ${APPSMITH_CUSTOM_DOMAIN}
-      # желательны ещё две строки — иначе Appsmith не сможет шифровать секреты
       APPSMITH_ENCRYPTION_PASSWORD: ${APPSMITH_ENCRYPTION_PASSWORD}
       APPSMITH_ENCRYPTION_SALT: ${APPSMITH_ENCRYPTION_SALT}
