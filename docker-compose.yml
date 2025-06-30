@@ -11,7 +11,7 @@ services:
       - "443:443"
 
     volumes:
-      - /home/ubuntu/stacks:/appsmith-stacks
+      - /home/ubuntu/stacks:/appsmith-stacks 
 
     dns:
       - 8.8.8.8
@@ -22,5 +22,3 @@ services:
       APPSMITH_SUPABASE_ANON: ${APPSMITH_SUPABASE_ANON}
       APPSMITH_DASHBOARD_URL: ${APPSMITH_DASHBOARD_URL}
       APPSMITH_CUSTOM_DOMAIN: ${APPSMITH_CUSTOM_DOMAIN}
-      APPSMITH_ENCRYPTION_PASSWORD: ${APPSMITH_ENCRYPTION_PASSWORD}
-      APPSMITH_ENCRYPTION_SALT: ${APPSMITH_ENCRYPTION_SALT}
